@@ -23,5 +23,12 @@ class SecurityController extends AbstractController
         return $this->json([
             'user' =>'/api/users/'.$user->getId(),
         ]);
+        //🧰for test purpose : header session is like this : cookie  → PHPSESSID=mtdllsu3jom9sflug33a0015o0
+    }
+
+    #[Route('/logout', name: 'app_logout', methods: ['POST'])]
+    public function logout(){
+        //vide
+        //https://youtu.be/bewgb9buIfI?t=1404
     }
 }
