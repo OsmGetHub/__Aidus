@@ -1,16 +1,17 @@
-import React, {Component} from 'react';
-import ReactDOM from "react-dom";
-import Nav from "./js/nav"
+import React from 'react';
+import Nav from "./offres/nav"
 import InfoPerosonnels from "./profile/InfoPerosonnels";
-class Profile extends Component {
-    render() {
+import {useState} from "React";
+
+export const EtudesContext = React.createContext(null)
+
+export default function Profile({etudes, setEtudes}){
         return (
             <React.StrictMode>
-                <Nav />
-                <InfoPerosonnels />
+                <EtudesContext.Provider value={{etudes, setEtudes}}>
+                    <Nav />
+                    <InfoPerosonnels />
+                </EtudesContext.Provider>
             </React.StrictMode>
         );
-    }
 }
-
-ReactDOM.render(<Profile />, document.getElementById("root"))

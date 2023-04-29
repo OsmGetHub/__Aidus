@@ -1,16 +1,14 @@
 import React from 'react'
-
-
-export default function AjoutFormation({setEduModal}){
+export default function AjoutFormationModal({setData, setEtude}){
     return (
         <div className="modal-main">
-            <form action="" style={styleForm}>
-                <label htmlFor="input">Ecole*</label>
+            <form action="#" style={styleForm}>
+                <label htmlFor="input">Etablissement</label>
                 <input style={inputs} type="text" required/>
                 <label htmlFor="input">Diplome</label>
-                <input style={inputs}type="text"/>
+                <input style={inputs} type="text" required/>
                 <label htmlFor="input">Domain d'etude</label>
-                <input style={inputs} type="text"/>
+                <input style={inputs} type="text" required/>
                 <div style={divDate}>
                     <label htmlFor="input">Date de debut</label>
                     <input style={inputs} className="debut" type="date"/>
@@ -19,13 +17,18 @@ export default function AjoutFormation({setEduModal}){
                 </div>
                 <label htmlFor="input">Resultat obtenu</label>
                 <input style={inputs} type="text"/>
-                <input style={submitButton} type="submit" value="Enregistrer"/>
-                <input onClick={()=>setEduModal(false)} style={resetButton} type="reset" value="Annuler"/>
+                <input onClick={(e)=>addformation(e)} style={submitButton} type="submit" value="Enregistrer"/>
+                <input onClick={()=>{setEtude(false)}} style={resetButton} type="reset" value="Annuler"/>
             </form>
         </div>
     );
 }
 
+function addformation(e){
+
+    console.log(e)
+
+}
 //Style de la section de formation --PROFILE
 
 const styleForm ={

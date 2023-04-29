@@ -20,8 +20,7 @@ Encore
      * Each entry will result in one JavaScript file (e.g. js.js)
      * and one CSS file (e.g. js.css) if your JavaScript imports CSS.
      */
-    .addEntry('js', './assets/app.js')
-    .addEntry('profile', './assets/profile.js')
+    .addEntry('offres', './assets/login.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
