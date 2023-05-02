@@ -1,3 +1,35 @@
+.links a:hover, .links a:active {
+    color: #12549B;
+}
+
+
+/*Style Articles*/
+a:hover, a:visited, a:link, a:active{
+    text-decoration: none;
+    color: #808080;
+}
+/*Style pagination*/
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: #12549B;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+/*Style modal*/
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
 *{
     padding: -2px;
