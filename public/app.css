@@ -77,3 +77,13 @@ div#add-to-profile button {
     border: 0px;
     background-color: transparent;
 }
+
+/*Styles de Login*/
+.connexion:hover{
+    transform: translate(0px, -3px);
+    box-shadow: 0 5px 10px rgba(0,0, 0, 0.3);
+}
+.connexion:active{
+    transform: translate(0px, 3px);
+    box-shadow: 0 2.5px 6px rgba(0,0, 0, 0.3);
+}

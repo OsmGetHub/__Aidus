@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-
+import ReactDOM from 'react-dom';
 import OffresEmploi from "./offres_emploi";
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import OffresStage from "./offres_stage";
@@ -35,3 +35,4 @@ export default function App() {
     );
 }
 
+ReactDOM.render(<App />, document.getElementById('root'))

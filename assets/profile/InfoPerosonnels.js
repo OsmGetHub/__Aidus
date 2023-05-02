@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import AddCareer from './AddCareer'
 import AddModal from "./AddModal";
 import AjoutFormation from "./AjoutFormtion";
@@ -7,15 +7,12 @@ import CarriereEtudes from "./CarriereEtudes";
 import Experience from "./Experience";
 // import '../images'
 import {GolbalData} from "../app";
+import {useSelector} from "react-redux";
 
 
 export default function  InfoPerosonnels() {
-    const userData = useContext(GolbalData)
-    const [Modal, setModal] = useState(false);
-    const [education, setEducation] = useState(true);
-    const [experiance, setExperiance] = useState(true);
-    const [EducationModal, setEduModal] = useState(false);
-    const [ExperianceModal, setExpModal] = useState(false);
+    const {modal, education, experience, educationModal, experienceModal} = useSelector(state => state.Infospersonel);
+    const userData = useContext(GolbalData);
         return (
                 <div style={ALL_IN_MAIN}>
                     <div style={INFOS_HEADER}>
@@ -92,33 +89,38 @@ export default function  InfoPerosonnels() {
                     }}>
                         <>
                             {
+                                console.log("The modal value from store "+modal+ " education "+education)
+                            }
+                        </>
+                        <>
+                            {
                                 (education == true) ? <CarriereEtudes  /> : ''
                             }
                         </>
                         <>
                             {
-                                (experiance == true) ? <Experience  /> : ''
+                                (experience == true) ? <Experience  /> : ''
                             }
                         </>
                         <>
                             {
-                                (education == false || experiance == false) ?  <AddCareer setModal={setModal}/> : ''
+                                (education == false || experience == false) ?  <AddCareer /> : ''
                             }
                         </>
                     </div>
                     <>
                         {
-                            Modal ? <AddModal setModal ={setModal} setEduModal = {setEduModal} setExpModal={setExpModal}/> : ''
+                            modal ? <AddModal /> : ''
                         }
                     </>
                     <>
                         {
-                            EducationModal ? <AjoutFormation setEduModal = {setEduModal}/> : ''
+                            educationModal ? <AjoutFormation /> : ''
                         }
                     </>
                     <>
                         {
-                            ExperianceModal ? <AjoutExperience setExpModal={setExpModal}/> : ''
+                            experienceModal ? <AjoutExperience /> : ''
                         }
                     </>
                     <div style={{

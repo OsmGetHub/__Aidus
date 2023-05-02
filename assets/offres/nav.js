@@ -4,16 +4,18 @@ import profile from '../data/default.jpg'
 import click from '../data/arrow.png'
 import {Link} from "react-router-dom";
 import {GolbalData} from "../app";
+import {useDispatch} from "react-redux";
+import {setLogin} from "../ReduxToolkit/LoginSlice";
+import Cookies from 'js-cookie'
+import {store} from "../ReduxToolkit/store";
 
 function Nav(){
-    const userData = useContext(GolbalData)
-    useEffect(() => {
-
-        console.log("From Nav")
-        console.log(userData)
-
-    }, []);
-
+    const dispatch = store.dispatch;
+    function logout(){
+        window.location.href = "http://127.0.0.1:8000/logout";
+        Cookies.remove('currentUser')
+    }
+    const userData = useContext(GolbalData);
     return(
         <React.StrictMode>
             <div style={{
@@ -117,17 +119,15 @@ function Nav(){
                                     backgroundRepeat: "no-repeat",
                                     paddingLeft: "45px"
 
-                                }}>Deconnexion</li>
+                                }}><a href="" onClick={logout}>Deconnexion</a></li>
                             </ul>
                         </div>
-
                     </div>
                 </nav>
             </div>
         </React.StrictMode>
     );
 }
-
 
 // styles de la barre de navigation
 const AIDUS = {

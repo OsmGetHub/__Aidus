@@ -35,12 +35,12 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
         ),
         //👇 pour ajouter "/api/me" :
         new Get(name: 'me',
-                paginationEnabled:false, 
-                uriTemplate: '/me', 
+                paginationEnabled:false,
+                uriTemplate: '/me',
                 controller: MeController::class,
                 read:false,
                 normalizationContext:['groups'=>['user:read']],
-                security: "is_granted('ROLE_ETUDIANT')"
+//                security: "is_granted('ROLE_ETUDIANT')"
             ),
         // new GetCollection(),
         new Post(

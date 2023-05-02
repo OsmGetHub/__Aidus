@@ -1,5 +1,8 @@
 import React from 'react'
-export default function AjoutFormationModal({setData, setEtude}){
+import {useDispatch} from "react-redux";
+import {setEducation, setEduModal} from "../../ReduxToolkit/InfospSlice";
+export default function AjoutFormationModal(){
+    const dispatch = useDispatch()
     return (
         <div className="modal-main">
             <form action="#" style={styleForm}>
@@ -18,7 +21,7 @@ export default function AjoutFormationModal({setData, setEtude}){
                 <label htmlFor="input">Resultat obtenu</label>
                 <input style={inputs} type="text"/>
                 <input onClick={(e)=>addformation(e)} style={submitButton} type="submit" value="Enregistrer"/>
-                <input onClick={()=>{setEtude(false)}} style={resetButton} type="reset" value="Annuler"/>
+                <input onClick={()=>dispatch(setEduModal(false))} style={resetButton} type="reset" value="Annuler"/>
             </form>
         </div>
     );

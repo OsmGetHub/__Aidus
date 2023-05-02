@@ -1,9 +1,11 @@
-import React, {useState} from 'React';
+import React, {useState} from 'react';
+import {useDispatch} from "react-redux";
+import {setModal} from "../ReduxToolkit/InfospSlice";
 
-export default function AddCareer({setModal}){
-
+export default function AddCareer(){
+    const dispatch = useDispatch()
     return(
-        <div onClick={()=>setModal(true)} style={ADDCREER}>
+        <div onClick={()=>dispatch(setModal(true))} style={ADDCREER}>
             <a   style={{
                 padding:"15px 25px",
                 display:"block",

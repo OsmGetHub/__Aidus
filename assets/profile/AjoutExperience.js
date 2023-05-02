@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
+import {useDispatch} from "react-redux";
+import {setExpModal} from "../ReduxToolkit/InfospSlice";
 
-export default function AjoutExperience({setExpModal}){
+export default function AjoutExperience(){
+    const dispatch = useDispatch()
     return (
         <div className="modal-main">
             <form action="" style={styleForm}>
@@ -21,7 +24,7 @@ export default function AjoutExperience({setExpModal}){
                 <label style={inputs}>Descriptif</label>
                 <textarea style={inputs} name="" id="" cols="30" rows="10"></textarea>
                 <input style={submitButton} type="submit" value="Enregistrer"/>
-                <input onClick={()=>setExpModal(false)} style={resetButton} type="reset" value="Annuler"/>
+                <input onClick={()=>dispatch(setExpModal(false))} style={resetButton} type="reset" value="Annuler"/>
             </form>
         </div>
     );
