@@ -36,6 +36,4 @@ export const EmploiArticlesSlice = createSlice({
         }
     }
 })
-
-// export const {setOffreEmploi} = EmploiArticlesSlice.actions
 export default EmploiArticlesSlice.reducer

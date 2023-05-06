@@ -2,6 +2,7 @@ import React from 'react';
 import Nav from './offres/nav'
 import Filtrage from "./offres/flitrage";
 import Articles from "./offres/articles";
+import Footer from "./offres/footer";
 
 export default function OffresStage(){
 
@@ -18,6 +19,7 @@ export default function OffresStage(){
                 <Filtrage />
                 <Articles />
             </div>
+            <Footer />
         </React.StrictMode>
     );
 

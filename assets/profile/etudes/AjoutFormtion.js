@@ -1,19 +1,18 @@
-import React from 'react';
+import React from 'react'
 import {useDispatch} from "react-redux";
-import {setExpModal} from "../ReduxToolkit/InfospSlice";
+import {setEduModal} from "../../ReduxToolkit/InfospSlice";
 
-export default function AjoutExperience(){
+
+export default function AjoutFormation(){
     const dispatch = useDispatch()
     return (
         <div className="modal-main">
             <form action="" style={styleForm}>
-                <label htmlFor="input">Entreprise*</label>
-                <select style={inputs} type="text" required>
-                    <option value="">Hello</option>
-                </select>
-                <label htmlFor="input">Fonction*</label>
-                <input style={inputs}type="text" required/>
-                <label htmlFor="input">Secteur d'activite</label>
+                <label htmlFor="input">Ecole*</label>
+                <input style={inputs} type="text" required/>
+                <label htmlFor="input">Diplome</label>
+                <input style={inputs}type="text"/>
+                <label htmlFor="input">Domain d'etude</label>
                 <input style={inputs} type="text"/>
                 <div style={divDate}>
                     <label htmlFor="input">Date de debut</label>
@@ -24,11 +23,14 @@ export default function AjoutExperience(){
                 <label style={inputs}>Descriptif</label>
                 <textarea style={inputs} name="" id="" cols="30" rows="10"></textarea>
                 <input style={submitButton} type="submit" value="Enregistrer"/>
-                <input onClick={()=>dispatch(setExpModal(false))} style={resetButton} type="reset" value="Annuler"/>
+                <input onClick={()=>dispatch(setEduModal(false))} style={resetButton} type="reset" value="Annuler"/>
             </form>
         </div>
     );
 }
+
+//Style de la section de formation --PROFILE
+
 const styleForm ={
     fontSize : "0.8em",
     backgroundColor : "white",
@@ -44,10 +46,6 @@ const styleForm ={
     position: "relative"
 }
 
-const inputs=  {
-    marginBottom: "10px"
-}
-
 const divDate = {
     display: "flex",
     flexDirection: "column",
@@ -55,6 +53,12 @@ const divDate = {
     height: "50px",
     width: "100%"
 }
+
+
+const inputs=  {
+    marginBottom: "10px"
+}
+
 const submitButton = {
     marginBottom: "10px",
     position: "absolute",

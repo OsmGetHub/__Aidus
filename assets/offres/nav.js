@@ -19,7 +19,7 @@ function Nav(){
     return(
         <React.StrictMode>
             <div style={{
-                width: "99vw",
+                width: "100vw",
                 backgroundColor : "white"
             }}>
                 <nav style={NAV}>

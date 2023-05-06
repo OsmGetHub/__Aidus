@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchEmploiArticles} from "./ReduxToolkit/EmploiArticlesSlice";
 import Filtrage from "./offres/flitrage";
 import Articles from "./offres/articles";
+import Footer from "./offres/footer";
 
 export default function OffresEmploi() {
     const [currentPage, setCurrentPage]= useState(1)
@@ -29,11 +30,12 @@ export default function OffresEmploi() {
                 display: "flex",
                 height: "1200px",
                 backgroundColor: "#E8E8E8",
-                width: "99vw"
+                width: "100vw"
             }}>
                 <Filtrage />
                 <Articles articles={articles} currentPage={currentPage} setCurrentPage={setCurrentPage} maxPage={numberOfpages}/>
             </div>
+            <Footer />
         </React.StrictMode>
     );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
-import AjoutFormationModal from "./experiences/AjoutFormationModal";
 import {useDispatch, useSelector} from "react-redux";
 import { setEduModal } from "../ReduxToolkit/InfospSlice";
+import AjoutFormation from "./etudes/AjoutFormtion";
 
 function CarriereEtudes() {
 
@@ -27,7 +27,7 @@ function CarriereEtudes() {
                     </div>
                 </div>
                 {
-                    educationModal ? <AjoutFormationModal/> : ''
+                    educationModal ? <AjoutFormation /> : ''
                 }
             </div>
         </React.StrictMode>

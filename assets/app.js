@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import OffresEmploi from "./offres_emploi";
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import OffresStage from "./offres_stage";
 import OffresFormation from "./offres_formation";
 import Profile from './profile';
 import AddPost from "./ajouterOffres/addPost";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchEmploiArticles} from "./ReduxToolkit/EmploiArticlesSlice";
+import Apercus from './profile/apercus'
 
 export default function App() {
     return (
@@ -18,6 +17,7 @@ export default function App() {
                 <Route path="/offreFormation" element={<OffresFormation />} />
                 <Route path="/Profile" element={<Profile />} />
                 <Route path="/ajouterOffre" element={<AddPost />} />
+                <Route path="/apercus" element={<Apercus />} />
             </Routes>
         </BrowserRouter>
     );

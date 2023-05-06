@@ -1,12 +1,13 @@
 import React from 'react';
 import AddCareer from './AddCareer'
 import AddModal from "./AddModal";
-import AjoutFormation from "./AjoutFormtion";
-import AjoutExperience from "./AjoutExperience";
+import AjoutFormation from "./etudes/AjoutFormtion";
+import AjoutExperience from "./experiences/AjoutExperience";
 import CarriereEtudes from "./CarriereEtudes";
 import Experience from "./Experience";
 import {useSelector} from "react-redux";
 import {add_for_profile, apercus, default_profile_image, locked, modify, visiblity} from "../images";
+import {Link} from "react-router-dom";
 
 
 export default function  InfoPerosonnels() {
@@ -160,10 +161,7 @@ export default function  InfoPerosonnels() {
                             experienceModal ? <AjoutExperience /> : ''
                         }
                     </>
-                    <div style={{
-                        gridColumn: "6 / 7",
-                        gridRowStart: "2"
-                    }}><a style={APERCUS}>Apercus</a></div>
+                    <div style={APERCUS}><Link to={"/apercus"}>Apercus</Link></div>
                 </div>
 
         );
@@ -171,10 +169,6 @@ export default function  InfoPerosonnels() {
 
 
 //Styles de profile etudiant
-
-const requiredFiledIcons = {
-    width : "15px"
-}
 const REQUIRED_FIELD = {
     position : "relative",
     padding : "4px 50px 4px 5px",
@@ -218,8 +212,8 @@ const PERSONAL_INFOS ={
 }
 
 const APERCUS ={
-    gridRowStart : "2",
-    gridColumn: "7 / 8",
+    gridColumn: "6 / 7",
+    gridRowStart: "2",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
