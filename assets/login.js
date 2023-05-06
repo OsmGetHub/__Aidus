@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
 import Cookies from 'js-cookie'
+import { useDispatch, useSelector} from "react-redux";
+import {setLogin, setUser} from "./ReduxToolkit/LoginSlice";
+import {setCni, setEmail, setNom, setPrenom, setSexe, setTelephone, setType} from "./ReduxToolkit/UserSlice";
 import App from './app';
-import {useDispatch, useSelector} from "react-redux";
-import {setLogin} from "./ReduxToolkit/LoginSlice";
 
 const ENVIRONMENT_BOX = {
     display : "flex",
@@ -60,8 +61,8 @@ const BUTTON = {
 }
 export default function Login(){
 
-    const [cne, setCne] = useState('')
-    const [cni, setCni] = useState('')
+    const [cne, setCne_] = useState('')
+    const [cni, setCni_] = useState('')
     const isLogged = useSelector(state => state.UserLogin.isLogged)
     const dispatch = useDispatch()
 
@@ -71,19 +72,20 @@ export default function Login(){
         if(session === undefined){
             dispatch(setLogin(false))
         }
-    }, []);
+        else userData()
 
+    },[]);
 
     const LOGIN_FORM =
         <div style={ENVIRONMENT_BOX}>
             <form style={BOX} action="">
                 <div style={HEADER}><span style={{margin : "auto"}}>s'authentifier</span></div>
                 <input style={INPUT} id="1" className="cne" type="text" onChange={(e)=>{
-                    setCne(e.target.value)
+                    setCne_(e.target.value)
                 }
                 } placeholder="CNE"/>
                 <input  style={INPUT} id="2"classeName= "cni" type="text" onChange={(e)=>{
-                    setCni(e.target.value)
+                    setCni_(e.target.value)
                 }
                 } placeholder="CNI"/>
                 <a className="connexion" style={BUTTON}  href="" onClick={(e)=>processData(e)}>connexion</a>
@@ -91,20 +93,68 @@ export default function Login(){
         </div>
 
     return (
-        <>
+        <React.StrictMode>
             {
                 (!isLogged) ? LOGIN_FORM : ''
             }
             {
-                isLogged ? <App/> : ''
+                isLogged ? <App /> : ''
             }
-        </>
+        </React.StrictMode>
     );
 
-    async function processData (event) {
-        event.preventDefault()
-        console.log({cne, cni})
 
+
+    function userData() {
+        axios.get(Cookies.get('currentUser'), {
+            headers : {
+                'Content-Type' : 'application/json'
+            }
+        }).then( (response) => {
+            const _response = response.data;
+            dispatch(setCni({
+                value: _response.CNI,
+                isVisible : true,
+                isLocked : false
+            }))
+            dispatch(setNom({
+                value: _response.LastName,
+                isVisible : true,
+                isLocked : false
+            }))
+            dispatch(setPrenom({
+                value: _response.FirstName,
+                isVisible : true,
+                isLocked : false
+            }))
+            dispatch(setTelephone({
+                value: _response.numTelephone,
+                isVisible : false,
+                isLocked : true
+            }))
+            dispatch(setSexe({
+                value: _response.sexe,
+                isVisible : true,
+                isLocked : false
+            }))
+            dispatch(setEmail({
+                value: _response.email,
+                isVisible : false,
+                isLocked : true
+            }))
+            dispatch(setType({
+                value: _response.roles,
+                isVisible : true,
+                isLocked : false
+            }))
+
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
+
+    function processData (event){
+        event.preventDefault()
         axios.post('http://127.0.0.1:8000/login', {username : cne, password : cni}, {
             headers : {
                 'Content-Type' : 'application/json'
@@ -112,14 +162,18 @@ export default function Login(){
         })
             .then(
                 (response)=> {
+                    dispatch(setUser(response.data))
                     dispatch(setLogin(true))
                     Cookies.set('currentUser',response.data.user)
+                    userData()
                 }
-            ).catch((err)=>{
+            )
+            .catch((err)=>{
             console.log(err.request)
         })
+
+
 
     }
 
 }
-

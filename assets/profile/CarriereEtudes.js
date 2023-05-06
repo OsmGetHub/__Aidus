@@ -1,34 +1,12 @@
-import React, {useContext, useState} from 'react';
-import {EtudesContext} from "../profile";
-import {ADDCREER} from "./AddCareer";
-import BlockEtude from "./etudes/blockEtude";
+import React from 'react';
 import AjoutFormationModal from "./experiences/AjoutFormationModal";
 import {useDispatch, useSelector} from "react-redux";
-import {setEducation, setEduModal} from "../ReduxToolkit/InfospSlice";
+import { setEduModal } from "../ReduxToolkit/InfospSlice";
 
 function CarriereEtudes() {
 
     const {educationModal} = useSelector(state => state.Infospersonel)
     const dispatch = useDispatch()
-    const {etudes, setEtudes} = useContext(EtudesContext)
-    const [etudesData, setData] = useState([
-        {
-            etablissement : "Universite Ibn Zohr",
-            imageEtablissemebt : "https://lh3.googleusercontent.com/fife/APg5EOY3yRTUZBxP-DcfCEcbItN36WE5VAA0ipYS5j2HuvnYlWUJqtLmSwFSqmcWcJwF70pe0biykIFokixGoO99Gsb8ILNzxGcukiQiS3pcVChWkgX0EUlbvfZCZ1JCDgczVAi5-wBGHQN6GYre8-54R9opWK05urNLEDNHQsIzldDYfv5dIsfvRnuBrY5jsvW5sbmssa5lteTunbR_CdbkNETbvM3ruYOH2REugZoYAQq9LWhjhl7sLpbpJyyyg0-Z6Q6gQ33D4DP9WuTVj43BSCSb3Iv7hMrvV6jPVKCnxq9vSXBmhAVHIYfEsPP7gBwxnN_FFwCobNXSf-W8v6XRFjgRC_lo1iqzrfpRGA_-AQM7Y02KooCr4rnRjlqDs9iKidADMCxB8WR9TvkdWHuahq2dctXzb6z5eECiQg_enrl_xZ9aFCjmvZLCS0P6O5KnNDRrDapxjruq3vH0KUcT1SEFiG1Qr86zBFbqf1VFW9T0Tofu-Qv5IYXrQf9AWOnjoOQWMGu3m3e3FPgicRPph5ECeZID64MJHALIqILorZD42HJ-pxK01-rtbshQE97g5fwrqnDWX5_LD1Di30sMoKm-Z_BvuzCLXBBUTunDnMWbpa7rfGmFfEtw8M1xxeQCRntPZurfzD_i03wmfvG_0bnWYnkjPt2--qVPIcMm4mla8wCppulRn1UQN5puGj2kKLW6dcRZKaPp0kYT-bdkQUTXcaGGiINywFz5TRVAUdKNO2-_QlZXM3tXYKZnRyxi1_U5EPKCf6DquPhfJPcRD7mQY0KzifEKKihdLwG6lGQL8rt-Yv_zHy2F4bAWMeqjjwqPu9kB0c0SfTcyVTAAIxtog67i3ICkVFqq3cokaSnuCcHbe65YfeAeNOYLPOL1CWmU-p1nJo7WSA9zZ8oRMNlFNJj_pdL3AZfGGvLzu_rSiN0jbr6rCci6-xvk9yzAnhpQp1_KE3gYD_1QL9u6xFbkhmXXWUvuBw9lDYlAq0PWaRkqyZoikr6fdV7fYMULt_0_DyZwz10n4xQ2RrspDV1UDrYW93Z5zVKsuIUJGHI7XRwpQzBQMDPBLO6Vq5bJD10z3w7zqiPcHPy02bp1wYeICYalsQGCOL1tEAQTOIAIh4VbaPsS2OJG6gZnpHyanLlhPA6EPFeMFsWX93zHT7FblMdo4koPiV_yvYt_OoAwAoMubH9hiNf1-gt4ualzuv3UiwkRzQK8y9BZ1zfemG7vr2C2kAbVt1--__iID3I_UnrdG_Xd3I_w22_0NzMJ-KumkOfdRCJSAiAWz4yS3Jl8fiCxLpetOcOhlcsPcVUk5GGNenDrv74T7TiMdLVOVilRvAmBkleOjyiBlokurNTJP-rmEf92LG0MSKdsNLEGO7df8NZlyQz6OtoY59aKdQDobnrjkOhnxK0UQWsB6QaKv8s1u_EIjPksFY63eJFlflq8v3sQ5WjvWhtu36dhWTtQBugGIIMyAnii4jFXWAiA4dYDgLGHOaPwSb_fb8sejuBIP7hW8WBSRit6r5RTuOUbIbnn0NaObo3WIbGN0THlTELysR1zU2bfJqkOoWUFpVdJ0gSB-RcevTtoubfx6d0DHib7=w2000-h1730",
-            diplome : "Licence",
-            branche : "genie logiciel",
-            dateObtention : "Septembre 2021 - Juin 2022",
-            isLocked : true
-        },
-        {
-            etablissement : "Universite Ibn Zohr",
-            imageEtablissemebt : "https://lh3.googleusercontent.com/fife/APg5EOY3yRTUZBxP-DcfCEcbItN36WE5VAA0ipYS5j2HuvnYlWUJqtLmSwFSqmcWcJwF70pe0biykIFokixGoO99Gsb8ILNzxGcukiQiS3pcVChWkgX0EUlbvfZCZ1JCDgczVAi5-wBGHQN6GYre8-54R9opWK05urNLEDNHQsIzldDYfv5dIsfvRnuBrY5jsvW5sbmssa5lteTunbR_CdbkNETbvM3ruYOH2REugZoYAQq9LWhjhl7sLpbpJyyyg0-Z6Q6gQ33D4DP9WuTVj43BSCSb3Iv7hMrvV6jPVKCnxq9vSXBmhAVHIYfEsPP7gBwxnN_FFwCobNXSf-W8v6XRFjgRC_lo1iqzrfpRGA_-AQM7Y02KooCr4rnRjlqDs9iKidADMCxB8WR9TvkdWHuahq2dctXzb6z5eECiQg_enrl_xZ9aFCjmvZLCS0P6O5KnNDRrDapxjruq3vH0KUcT1SEFiG1Qr86zBFbqf1VFW9T0Tofu-Qv5IYXrQf9AWOnjoOQWMGu3m3e3FPgicRPph5ECeZID64MJHALIqILorZD42HJ-pxK01-rtbshQE97g5fwrqnDWX5_LD1Di30sMoKm-Z_BvuzCLXBBUTunDnMWbpa7rfGmFfEtw8M1xxeQCRntPZurfzD_i03wmfvG_0bnWYnkjPt2--qVPIcMm4mla8wCppulRn1UQN5puGj2kKLW6dcRZKaPp0kYT-bdkQUTXcaGGiINywFz5TRVAUdKNO2-_QlZXM3tXYKZnRyxi1_U5EPKCf6DquPhfJPcRD7mQY0KzifEKKihdLwG6lGQL8rt-Yv_zHy2F4bAWMeqjjwqPu9kB0c0SfTcyVTAAIxtog67i3ICkVFqq3cokaSnuCcHbe65YfeAeNOYLPOL1CWmU-p1nJo7WSA9zZ8oRMNlFNJj_pdL3AZfGGvLzu_rSiN0jbr6rCci6-xvk9yzAnhpQp1_KE3gYD_1QL9u6xFbkhmXXWUvuBw9lDYlAq0PWaRkqyZoikr6fdV7fYMULt_0_DyZwz10n4xQ2RrspDV1UDrYW93Z5zVKsuIUJGHI7XRwpQzBQMDPBLO6Vq5bJD10z3w7zqiPcHPy02bp1wYeICYalsQGCOL1tEAQTOIAIh4VbaPsS2OJG6gZnpHyanLlhPA6EPFeMFsWX93zHT7FblMdo4koPiV_yvYt_OoAwAoMubH9hiNf1-gt4ualzuv3UiwkRzQK8y9BZ1zfemG7vr2C2kAbVt1--__iID3I_UnrdG_Xd3I_w22_0NzMJ-KumkOfdRCJSAiAWz4yS3Jl8fiCxLpetOcOhlcsPcVUk5GGNenDrv74T7TiMdLVOVilRvAmBkleOjyiBlokurNTJP-rmEf92LG0MSKdsNLEGO7df8NZlyQz6OtoY59aKdQDobnrjkOhnxK0UQWsB6QaKv8s1u_EIjPksFY63eJFlflq8v3sQ5WjvWhtu36dhWTtQBugGIIMyAnii4jFXWAiA4dYDgLGHOaPwSb_fb8sejuBIP7hW8WBSRit6r5RTuOUbIbnn0NaObo3WIbGN0THlTELysR1zU2bfJqkOoWUFpVdJ0gSB-RcevTtoubfx6d0DHib7=w2000-h1730",
-            diplome : "Licence",
-            branche : "genie logiciel",
-            dateObtention : "Septembre 2021 - Juin 2022",
-            isLocked : false
-        },
-    ])
     return (
         <React.StrictMode>
             <div style={BlockEtudes}>
@@ -49,13 +27,7 @@ function CarriereEtudes() {
                     </div>
                 </div>
                 {
-                    etudesData.map((d)=>(
-                            <div><BlockEtude dataE={d} /><br/></div>
-                        )
-                    )
-                }
-                {
-                    educationModal ? <AjoutFormationModal setData={setData} /> : ''
+                    educationModal ? <AjoutFormationModal/> : ''
                 }
             </div>
         </React.StrictMode>

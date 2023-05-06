@@ -1,11 +1,9 @@
-import React, {useEffect, useReducer} from 'react'
+import React from 'react'
 import {render} from "react-dom";
-import Data from '../data/data.json'
+import {bag, localisation, search} from "../images";
 
-function Filtrage({filtred, records, onChange}){
-    const [lists, setLists] = React.useState([]);
-    const [listr, setListr] = React.useState([]);
-    const [liste, setListe] = React.useState([]);
+function Filtrage(){
+
         return(
                 <div style={FILTER_CONTAINER}>
                     <form style={FILTER}>
@@ -78,19 +76,6 @@ function Filtrage({filtred, records, onChange}){
     }
 
 
-    // function deLists(e){
-    //     const newList = lists;
-    //     const index = newList.indexOf(document);
-    //     console.log(e)
-    //     newList.slice(index, 1);
-    //     e.preventDefault()
-    //     const span = newList.map((list, i) => {
-    //         return <span className="variable" key={i}> {list}</span>
-    //     })
-    //     render(span, document.getElementById("secteur"))
-    //
-    //
-    // }
     function listrPrinter(e){
         const newList = listr;
         if(e.key ==="Enter"){
@@ -167,7 +152,7 @@ const INPUTS_SECTEUR ={
     "backgroundSize": "22px",
     "backgroundPosition": "8px center",
     "paddingLeft": "37px",
-    "backgroundImage" : 'url("https://bit.ly/3L8UGqG")',
+    "backgroundImage" : `url(${search})`,
 }
 
 const INPUTS_REGION ={
@@ -182,7 +167,7 @@ const INPUTS_REGION ={
     "backgroundSize": "18px",
     "backgroundPosition": "8px center",
     "paddingLeft": "37px",
-    "backgroundImage" : 'url("https://bit.ly/3LdSqP0")',
+    "backgroundImage" : `url(${localisation})`,
 }
 
 const INPUTS_ENTREPRISE ={
@@ -197,7 +182,7 @@ const INPUTS_ENTREPRISE ={
     "backgroundSize": "22px",
     "backgroundPosition": "8px center",
     "paddingLeft": "37px",
-    "backgroundImage" : 'url("https://bit.ly/3L6eI4Y")',
+    "backgroundImage" : `url(${bag})`,
 }
 
 const VARIABLE = {
@@ -210,6 +195,3 @@ const VARIABLE = {
     "padding": "4px 8px",
     "borderRadius": "5px"
 }
-// bag https://bit.ly/3L6eI4Y
-// region https://bit.ly/3LdSqP0
-// search https://bit.ly/3L8UGqG

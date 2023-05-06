@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useDispatch} from "react-redux";
 import {setModal} from "../ReduxToolkit/InfospSlice";
+import {add_for_profile} from "../images";
 
 export default function AddCareer(){
     const dispatch = useDispatch()
@@ -10,7 +11,7 @@ export default function AddCareer(){
                 padding:"15px 25px",
                 display:"block",
                 width:"100%"
-            }} href="#"><img style={{ height:"20px" }} src="profile-styles/Images_css/plus.png" alt="default"/></a>
+            }} href="#"><img style={{ height:"20px" }} src={add_for_profile} alt="default"/></a>
         </div>
     );
 }

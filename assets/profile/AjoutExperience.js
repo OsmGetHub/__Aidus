@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {useDispatch} from "react-redux";
 import {setExpModal} from "../ReduxToolkit/InfospSlice";
 

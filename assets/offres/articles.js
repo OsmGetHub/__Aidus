@@ -1,125 +1,71 @@
-import React, {useEffect, useState, useMemo} from 'react'
-import SG from '../data/societe_generale.png'
-import Data from '../data/data.json'
-import axios from "axios";
+import React from 'react'
 
-
-function Articles ({filtred, records}){
-
-    const [currentPage, setCurrentPage] = useState(1);
-    const recordsPerPage = 4;
-    const lastIndex = currentPage * recordsPerPage;
-    const firstIndex = lastIndex - recordsPerPage;
-    const articles = records.filter((article) => {
-        if (filtred == '') return true
-        return article.title.toLowerCase().includes(filtred.toLowerCase())
-        || article.nomEntreprise.toLowerCase().includes(filtred.toLowerCase())
-
-    })
-    const npage = Math.ceil(articles.length/recordsPerPage);
-    const numbers = [...Array(npage+1).keys()].slice(1);
-
-
-        return(
-            <div style={MAIN} >
-                {
-                    articles.map(
-                        (e,i)=>(
-                        <div style={MAIN_A}  key={e.narticle}>
-                            <img src={LOGO}  alt=""/>
-                            <div>
-                            <h3><a href="content">{e.title}</a></h3>
-                            <p>{e.dateAjout} | <a href="content">{e.nomEntreprise}</a></p>
-                            <p>{e.desciption}</p>
-                            </div>
+function Articles ({articles, currentPage, setCurrentPage, maxPage}) {
+    return (
+        <div style={MAIN}>
+            {
+                (articles.status == 'success') ?
+                    articles.data['hydra:member'].map(
+                        (e, i) => (
+                        <div style={MAIN_A} key={e.id}>
+                        <img src={LOGO} alt=""/>
+                        <div>
+                        <h3><a href="content">{e.titre}</a></h3>
+                        <p>{e.date_ajout} | <a href="content">Entreprise</a></p>
+                        <p>{e.description}</p>
                         </div>
-                        )
+                        </div>
                     )
-                }
-                <div style={{ justifySelf: "flex-end" }}>
-                    <ul className="pagination">
-                        <li >
-                            <a href="content"
-                               onClick={
-                                   (e)=>(
-                                       e.preventDefault(),
-                                           prPage()
-                                   )
-                               }
-                            >Precedant</a>
-                        </li>
-                        <li>
-                            <a href="content" onClick={
-                                (e)=>{
-                                    e.preventDefault()
-                                    startPage()
-                                }
-                            }>{"<<"}</a>
-                        </li>
-                        {
-                            numbers.map(
-                                (n,i) =>(
-                                    <li
-                                        key={i}
-                                    >
-                                        <a href="content" className={`${currentPage === n ? 'active' : ''}`}
-                                           onClick={
-                                               (e)=>(
-                                                   e.preventDefault(),
-                                                       changeCPage(n)
-                                               )
-                                           }
-                                        >{n}</a>
-                                    </li>
-                                )
-                            )
+                ) : <p style={{
+                        // margin : "auto",
+                        fontWeight : "bold",
+                        fontSize : "1.2em"
+
+                    }}>{articles.status}</p>
+            }
+            <div style={{justifySelf: "flex-end"}}>
+                <ul className="pagination">
+                    <li>
+                        <a href="" onClick={(e)=>{
+                            e.preventDefault();
+                            (currentPage !== 1) ? setCurrentPage(currentPage - 1) : ''
                         }
-                        <li>
-                            <a href="content" onClick={
-                                (e)=>{
-                                    e.preventDefault()
-                                    endPage()
-                                }
-                            }>{">>"}</a>
-                        </li>
-                        <li >
-                            <a href="content"
-                               onClick={
-                                   (e)=>(
-                                       e.preventDefault(),
-                                           nePage()
-                                   )
-                               }
-                            >Suivante</a>
-                        </li>
-                    </ul>
-                </div>
+                        }>Precedante</a>
+                    </li>
+                    <li>
+                        <a href="" onClick={(e)=>{
+                            e.preventDefault()
+                            setCurrentPage(1)
+                        }
+                        } >{"<<"}</a>
+                    </li>
+                    <li ><a onClick={(e)=>e.preventDefault()} href="">...</a></li>
+                    <li>
+                    </li>
+                    <li>
+                        <a href="" style={{
+                            backgroundColor: "#12549B",
+                            color: "white"
+                        }}>{currentPage}</a>
+                    </li>
+                    <li><a href="">...</a></li>
+                    <li>
+                        <a onClick={(e)=> {
+                            e.preventDefault()
+                            setCurrentPage(maxPage)
+                        }} href="">{">>"}</a>
+                    </li>
+                    <li>
+                        <a href="" onClick={(e)=>{
+                            e.preventDefault();
+                            (currentPage < maxPage ) ? setCurrentPage(currentPage + 1) : ''
+                        }
+                        }>Suivante</a>
+                    </li>
+                </ul>
             </div>
-        )
-
-
-    function prPage(){
-
-        if((currentPage !== firstIndex )&& currentPage!== 1) {
-            setCurrentPage(currentPage - 1)
-        }
-
-    }
-    function endPage(){
-            setCurrentPage(numbers.length)
-    }
-    function startPage(){
-            setCurrentPage(1)
-    }
-    function changeCPage(id){
-        setCurrentPage(id)
-    }
-    function nePage(){
-        if((currentPage !== lastIndex) && currentPage !== numbers.length) {
-            setCurrentPage(currentPage + 1)
-        }
-    }
-
+        </div>
+    )
 }
 
 export default Articles;
@@ -138,7 +84,6 @@ const MAIN = {
 }
 
 const MAIN_A = {
-    marigin: "25px 25px 0px",
     display: "flex",
     padding: "20px",
     border: "2px solid #707070",

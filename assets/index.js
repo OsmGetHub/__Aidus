@@ -1,8 +1,8 @@
-import React, {rea} from 'react';
+import React from 'react';
 import Login from "./login";
-import {store} from "./ReduxToolkit/store";
-import {Provider} from "react-redux";
 import ReactDOM from "react-dom";
+import {Provider} from "react-redux";
+import {store} from "./ReduxToolkit/store";
 
 function Index() {
     return (
