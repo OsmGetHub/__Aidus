@@ -2,29 +2,37 @@
 
 namespace App\Entity;
 
+// use ApiPlatform\Core\Annotation\ApiFilter;
+use App\Entity\CycleEtude;
 use ApiPlatform\Metadata\Get;
+// use ApiPlatform\Core\Bridge\Doctrine\MongoDbOdm\Filter\SearchFilter;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Post;
-use App\Controller\MeController;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Delete;
+use App\Controller\MeController;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
 use Doctrine\Common\Collections\Collection;
+use phpDocumentor\Reflection\Types\Boolean;
 use Doctrine\Common\Collections\ArrayCollection;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\SerializedName;
+use ApiPlatform\Core\Bridge\Doctrine\MongoDbOdm\Filter\BooleanFilter;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 // #[ORM\Table(name: '`user`')] doctrine sauvegarde par defaut dans la table du nom de la classe sinon il faut la specifier grace a cette ligne
 #[ApiResource(
+    
     // security: "is_granted('ROLE_ADMIN')"    ,
     // normalizationContext: ['groups' => ['user:read']],
     operations:[
@@ -35,14 +43,14 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
         ),
         //👇 pour ajouter "/api/me" :
         new Get(name: 'me',
-                paginationEnabled:false,
-                uriTemplate: '/me',
+                paginationEnabled:false, 
+                uriTemplate: '/me', 
                 controller: MeController::class,
-                read:false,
+                read:false, //https://api-platform.com/docs/core/controllers/#retrieving-the-entity +🎥: https://youtu.be/BhXFvTqByeQ?t=377
                 normalizationContext:['groups'=>['user:read']],
-//                security: "is_granted('ROLE_ETUDIANT')"
+                // security: "is_granted('ROLE_ETUDIANT')"
             ),
-        // new GetCollection(),
+        new GetCollection(),
         new Post(
             denormalizationContext:['groups'=>['user:read','user:write']],
             normalizationContext:['groups'=>['user:read','user:write']]
@@ -50,8 +58,15 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
         // new Put(),
         // new Delete(),
         // new Patch(),
+    ],
+    paginationItemsPerPage: 5,
+
+    ),
+     ApiFilter(
+        SearchFilter::class,
+        properties:['FirstName'=>'partial'], //🎥(highly recommended):https://youtu.be/ZRBRtA_2NAo?t=4273 
+    )
     ]
-)]
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -107,12 +122,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $offreStages;
 
     #[ORM\OneToMany(mappedBy: 'ajouterPar', targetEntity: OffreEmploi::class)]
-    private Collection $offreEmplois;  //hadi tzadet because of OffreClient : chuf lteh kayna une methode tkhlik t3ref pour un user jami3 les offre le 3ndo
+    private Collection $offreEmplois;
+
+    #[ORM\OneToMany(mappedBy: 'ajouterPar', targetEntity: Formation::class)]
+    private Collection $formations;
+
+    #[ORM\ManyToMany(targetEntity: CycleEtude::class, inversedBy: 'Etudiants')]
+    private Collection $poursuivre;  //hadi tzadet because of OffreClient : chuf lteh kayna une methode tkhlik t3ref pour un user jami3 les offre le 3ndo
 
     public function __construct()
     {
         $this->offreStages = new ArrayCollection();
         $this->offreEmplois = new ArrayCollection();
+        $this->formations = new ArrayCollection();
+        $this->poursuivre = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -330,6 +353,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $offreEmploi->setAjouterPar(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Formation>
+     */
+    public function getFormations(): Collection
+    {
+        return $this->formations;
+    }
+
+    public function addFormation(Formation $formation): self
+    {
+        if (!$this->formations->contains($formation)) {
+            $this->formations->add($formation);
+            $formation->setAjouterPar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFormation(Formation $formation): self
+    {
+        if ($this->formations->removeElement($formation)) {
+            // set the owning side to null (unless already changed)
+            if ($formation->getAjouterPar() === $this) {
+                $formation->setAjouterPar(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, cycleEtude>
+     */
+    public function getPoursuivre(): Collection
+    {
+        return $this->poursuivre;
+    }
+
+    public function addPoursuivre(CycleEtude $poursuivre): self
+    {
+        if (!$this->poursuivre->contains($poursuivre)) {
+            $this->poursuivre->add($poursuivre);
+        }
+
+        return $this;
+    }
+
+    public function removePoursuivre(CycleEtude $poursuivre): self
+    {
+        $this->poursuivre->removeElement($poursuivre);
 
         return $this;
     }

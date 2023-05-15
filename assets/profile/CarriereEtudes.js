@@ -41,7 +41,7 @@ const BlockEtudes ={
     flexDirection : "column",
     alignContent : "center",
     padding: "10px 20px 0px",
-    border: "2px solid #707070",
-    boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.1)"
+    border: "1px solid #707070",
+    boxShadow: "0px 4px 3px rgba(0, 0, 0, 0.2)",
 }
 export default CarriereEtudes;

@@ -4,37 +4,35 @@ import profile from '../data/default.jpg'
 import click from '../data/arrow.png'
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
-import Cookies from 'js-cookie'
-import {store} from "../ReduxToolkit/store";
-import {add, deconnexion, default_profile_image, sittings} from "../images";
+import {add, deconnexion, add_for_profile, sittings} from "../images";
 
 function Nav(){
-    const dispatch = store.dispatch;
-    const {nom, prenom} = useSelector(state => state.UserData)
+    const {nom, prenom, type} = useSelector(state => state.UserData)
 
     function logout(){
         window.location.href = "http://127.0.0.1:8000/logout";
-        Cookies.remove('currentUser')
+        localStorage.removeItem('c_user')
     }
     return(
         <React.StrictMode>
             <div style={{
-                width: "100vw",
-                backgroundColor : "white"
+                minWidth: "1100px",
+                backgroundColor : "white",
             }}>
                 <nav style={NAV}>
-                    <div style={AIDUS}><Link style={{ color:"12549B"}} to={"/"}>
-                        <span style={AIDUS_A}>A</span>idus</Link>
-                    </div>
-                    <ul className="links" style={OFFRES}>
-                        <li><Link to={"/"} >Offres d'emploi</Link></li>
-                        <li><Link to={"/offreStage"} >Offres de stage</Link></li>
-                        <li><Link to={"/offreFormation"}>Offres de formation</Link></li>
-                        <li><Link to={"/"}>Entreprise</Link></li>
-                        <li><Link to={"/"}>Aides</Link></li>
+                    <Link style={{ color:"12549B"}} to={"/"}><div style={AIDUS}>
+                        <span style={AIDUS_A}>A</span>idus
+                    </div></Link>
+                    <ul style={OFFRES}>
+                        <li><Link to={"/"} ><a href="" className="navLink">Offres d'emploi</a></Link></li>
+                        <li><Link to={"/offrestage"} ><a href="" className="navLink">Offres de stage</a></Link></li>
+                        <li><Link to={"/offreformation"}><a href="" className="navLink">Offres de formation</a></Link></li>
+                        <li><Link to={"/"}><a href="" className="navLink">Entreprise</a></Link></li>
+                        <li><Link to={"/"}><a href="" className="navLink">Aides</a></Link></li>
                     </ul>
+                    <div className="nav-underline"></div>
                     <div style={PROFILE_SHORTCUT}>
-                        <a href="content" onClick={(event)=>{
+                        <a href="" onClick={(event)=>{
                             event.preventDefault()
                             document.getElementById("hidden").style.visibility="visible"
                         }}
@@ -44,7 +42,7 @@ function Nav(){
                                fontWeight: "bold"
                            }}
                         >
-                            <span>{nom.value}  {prenom.value}</span>
+                            <span style={{color : "#12549B"}}>{nom.value}  {prenom.value}</span>
                             <img src={click} alt="click"
                                  style={{
                                      width : "15px",
@@ -55,7 +53,7 @@ function Nav(){
                         <img src={profile} alt="photo-profile"
                              style={{
                                  width: "50px",
-                                 border: "2px solid black",
+                                 border: "2px solid #707070",
                                  borderRadius: "150px",
                                  marginLeft: "30px"
                              }}
@@ -83,20 +81,20 @@ function Nav(){
                             }}/>
                             <ul style={HIDDEN_DETAILS}>
                                 {
-                                    (true) ? <Link to={"/ajouterOffre"}><li style={POSTING_ELEGIBILITY}>Ajouter une offre</li></Link> : ''
+                                    (true) ? <Link to={"/ajouteroffre"}><li style={POSTING_ELEGIBILITY}>Ajouter une offre</li></Link> : ''
                                 }
                                 <li style={{
                                     margin: "0px",
                                     borderBottom: "1px solid #707070",
                                     padding: "15px 10px",
-                                    backgroundImage: `url(${default_profile_image})`,
+                                    backgroundImage: `url(${add_for_profile})`,
                                     backgroundSize: "20px",
                                     backgroundPosition: "10px center",
                                     backgroundRepeat: "no-repeat",
                                     paddingLeft: "45px"
 
                                 }}
-                                ><Link to={"/Profile"}>Profile</Link></li>
+                                ><Link to={"/profile"}>Profile</Link></li>
                                 <li style={{
 
                                     margin: "0px",
@@ -145,22 +143,22 @@ const AIDUS_A = {
 }
 
 const NAV = {
+    position : "relative",
     height: "15%",
     flexGrow: "1",
     display: "flex",
     justifyContent: "space-between",
     padding: "0px",
     boxSizing: "border-box",
-    boxShadow: "0px 0px 5px 0px rgba(0,0,0,0.2)"
+    boxShadow: "2px 4px 5px rgba(0,0,0,0.2)"
 }
 
 const OFFRES = {
-    boxSizing: "border-box",
     listStyleType: "none",
     display: "flex",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
-    width: "40%",
+    width: "45%",
     color: "#9D9D9D",
     fontFamily: "Arial"
 }

@@ -144,7 +144,7 @@ const INPUTS_SECTEUR ={
     "height": "50px",
     "margin": "10px 10px",
     "borderRadius": "12px",
-    "borderColor": "#9D9D9D",
+    "borderColor": "#707070",
     "backgroundColor": "#F7F7F7",
     "fontFamily": "Arial Rounded MT",
     "fontSize": "15px",
@@ -159,7 +159,7 @@ const INPUTS_REGION ={
     "height": "50px",
     "margin": "10px 10px",
     "borderRadius": "12px",
-    "borderColor": "#9D9D9D",
+    "borderColor": "#707070",
     "backgroundColor": "#F7F7F7",
     "fontFamily": "Arial Rounded MT",
     "fontSize": "15px",
@@ -174,7 +174,7 @@ const INPUTS_ENTREPRISE ={
     "height": "50px",
     "margin": "10px 10px",
     "borderRadius": "12px",
-    "borderColor": "#9D9D9D",
+    "borderColor": "#707070",
     "backgroundColor": "#F7F7F7",
     "fontFamily": "Arial Rounded MT",
     "fontSize": "15px",
@@ -186,7 +186,7 @@ const INPUTS_ENTREPRISE ={
 }
 
 const VARIABLE = {
-    "border": "1px solid black",
+    "border": "1px solid #707070",
     "margin": "2.5px",
     "backgroundColor": "#D2F0CC",
     "fontFamily": "Arial Rounded MT",

@@ -63,16 +63,16 @@ export default function Login(){
 
     const [cne, setCne_] = useState('')
     const [cni, setCni_] = useState('')
-    const isLogged = useSelector(state => state.UserLogin.isLogged)
+    const {isLogged, userLog} = useSelector(state => state.UserLogin)
     const dispatch = useDispatch()
 
     useEffect(() => {
 
-        const session = Cookies.get('currentUser')
-        if(session === undefined){
-            dispatch(setLogin(false))
+        const session = localStorage.getItem("c_user");
+        if(session){
+            userData()
+            dispatch(setLogin(true))
         }
-        else userData()
 
     },[]);
 
@@ -84,7 +84,7 @@ export default function Login(){
                     setCne_(e.target.value)
                 }
                 } placeholder="CNE"/>
-                <input  style={INPUT} id="2"classeName= "cni" type="text" onChange={(e)=>{
+                <input  style={INPUT} id="2"classeName= "cni" type="password" onChange={(e)=>{
                     setCni_(e.target.value)
                 }
                 } placeholder="CNI"/>
@@ -105,17 +105,19 @@ export default function Login(){
 
 
 
-    function userData() {
-        axios.get(Cookies.get('currentUser'), {
+    async function userData() {
+       
+        axios.get(localStorage.getItem("c_user"), {
             headers : {
                 'Content-Type' : 'application/json'
             }
         }).then( (response) => {
+            
             const _response = response.data;
             dispatch(setCni({
                 value: _response.CNI,
                 isVisible : true,
-                isLocked : false
+                isLocked : true
             }))
             dispatch(setNom({
                 value: _response.LastName,
@@ -130,12 +132,12 @@ export default function Login(){
             dispatch(setTelephone({
                 value: _response.numTelephone,
                 isVisible : false,
-                isLocked : true
+                isLocked : false
             }))
             dispatch(setSexe({
                 value: _response.sexe,
                 isVisible : true,
-                isLocked : false
+                isLocked : true
             }))
             dispatch(setEmail({
                 value: _response.email,
@@ -147,12 +149,12 @@ export default function Login(){
                 isVisible : true,
                 isLocked : false
             }))
-
+            dispatch(setLogin(true))
         }).catch((err)=>{
             console.log(err)
         })
     }
-
+    
     function processData (event){
         event.preventDefault()
         axios.post('http://127.0.0.1:8000/login', {username : cne, password : cni}, {
@@ -162,18 +164,16 @@ export default function Login(){
         })
             .then(
                 (response)=> {
-                    dispatch(setUser(response.data))
-                    dispatch(setLogin(true))
-                    Cookies.set('currentUser',response.data.user)
+                    console.log(response);
+                    dispatch(setUser(response.data.user))
+                    localStorage.setItem("c_user",response.data.user);
+                    console.log(userLog)
                     userData()
                 }
             )
             .catch((err)=>{
             console.log(err.request)
         })
-
-
-
     }
 
 }

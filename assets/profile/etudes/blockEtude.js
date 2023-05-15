@@ -3,7 +3,7 @@ export default function BlockEtude({dataE}){
     return(
         <div style={
             {
-                border : "1px solid black",
+                border : "1px solid #707070",
                 display : "grid",
                 gridTemplateColumns : "70px 20px 1fr",
                 backgroundImage : (dataE.isLocked) ? `url(${lock})` : "",
@@ -14,7 +14,7 @@ export default function BlockEtude({dataE}){
                 boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.2)"
             }
         }>
-            <img style={{gridColumn: "1 / 2", width : "70px", border:"2px solid black"}} src={dataE.imageEtablissemebt} alt="image d'etablissment"/>
+            <img style={{gridColumn: "1 / 2", width : "70px", border:"2px solid #707070"}} src={dataE.imageEtablissemebt} alt="image d'etablissment"/>
              <div style={{
                  gridColumn: "3 / 4",
                  display: "flex",

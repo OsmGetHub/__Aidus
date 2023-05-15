@@ -7,31 +7,6 @@
     </head>
     <body>
         {% block body %}
-            <style>
-                /* Scrool style */
-                ::-webkit-scrollbar {
-                    width: 10px;
-                }
-
-                /* Track */
-                ::-webkit-scrollbar-track {
-                    background: #f1f1f1;
-                }
-
-                /* Handle */
-                ::-webkit-scrollbar-thumb {
-                    background: #888;
-                }
-
-                /* Handle on hover */
-                ::-webkit-scrollbar-thumb:hover {
-                    background: #555;
-                }
-                body{
-                    padding: 0px;
-                    margin : 0px;
-                }
-            </style>
         {% endblock %}
     </body>
         {% block stylesheets %}
@@ -41,7 +16,7 @@
                     margin : 0px;
                 }
             </style>
-            <link href="{{ asset('/app.css') }}" rel="stylesheet"/>
+{#            <link href="{{ asset('/app.css') }}" rel="stylesheet"/>#}
         {% endblock %}
     {% block javascripts %}{% endblock %}
 </html>

@@ -8,11 +8,11 @@ function Articles ({articles, currentPage, setCurrentPage, maxPage}) {
                     articles.data['hydra:member'].map(
                         (e, i) => (
                         <div style={MAIN_A} key={e.id}>
-                        <img src={LOGO} alt=""/>
+                        <img src={e.img} alt=""/>
                         <div>
                         <h3><a href="content">{e.titre}</a></h3>
                         <p>{e.date_ajout} | <a href="content">Entreprise</a></p>
-                        <p>{e.description}</p>
+                        <p>{e.description.slice(0, 120)}...</p>
                         </div>
                         </div>
                     )
@@ -23,7 +23,7 @@ function Articles ({articles, currentPage, setCurrentPage, maxPage}) {
 
                     }}>{articles.status}</p>
             }
-            <div style={{justifySelf: "flex-end"}}>
+            <div>
                 <ul className="pagination">
                     <li>
                         <a href="" onClick={(e)=>{
@@ -80,7 +80,7 @@ const MAIN = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
-    paddingTop:"30px"
+    paddingTop:"30px",
 }
 
 const MAIN_A = {

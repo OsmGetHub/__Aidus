@@ -3,13 +3,13 @@ import React from 'react'
 export default function BlockExperience({dataE}){
     return(
         <div style={{
-            border : "1px solid black",
+            border : "1px solid #707070",
             display : "grid",
             gridTemplateColumns : "70px 20px 1fr",
             padding : "15px 13px",
             boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.2)"
         }}>
-            <img style={{gridColumn: "1 / 2", width : "70px", border:"2px solid black"}} src={dataE.imageSociete} alt="image d'etablissment"/>
+            <img style={{gridColumn: "1 / 2", width : "70px", border:"2px solid #707070"}} src={dataE.imageSociete} alt="image d'etablissment"/>
             <div style={{
                 gridColumn: "3 / 4",
                 display: "flex",

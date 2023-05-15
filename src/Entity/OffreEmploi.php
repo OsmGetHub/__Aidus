@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\OffreEmploiRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OffreEmploiRepository::class)]
-#[ApiResource()]
+#[ApiResource]
 class OffreEmploi
 {
     #[ORM\Id]
@@ -28,6 +28,10 @@ class OffreEmploi
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
+
+    #[ORM\ManyToOne(inversedBy: 'offreEmplois')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Emploi $appartenir = null;
 
     public function getId(): ?int
     {
@@ -78,6 +82,18 @@ class OffreEmploi
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getAppartenir(): ?Emploi
+    {
+        return $this->appartenir;
+    }
+
+    public function setAppartenir(?Emploi $appartenir): self
+    {
+        $this->appartenir = $appartenir;
 
         return $this;
     }

@@ -1,15 +1,16 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice} from "@reduxjs/toolkit";
+
 
 export const UserSlice = createSlice({
     name : 'user',
     initialState : {
         cne : {
-            value : 'D133515005',
+            value : '',
             isVisible : false,
             isLocked : true
         },
         cni : {
-            value : 'JT101634',
+            value : '',
             isVisible : false,
             isLocked : true
         },
@@ -29,37 +30,37 @@ export const UserSlice = createSlice({
             isLocked : false
         },
         date : {
-            value : new Date('2022-03-25'),
+            value : '',
             isVisible : true,
             isLocked : false
         },
         naissance : {
-            value : new Date('2001-11-05'),
+            value : '',
             isVisible : false,
             isLocked : true
         },
         adresse : {
-            value : '59 HAY AL FARAH III',
+            value : '',
             isVisible : true,
             isLocked : false
         },
         ville : {
-            value : 'AGADIR',
+            value : '',
             isVisible : true,
             isLocked : false
         },
         telephone : {
-            value : '+212 630330357',
+            value : '',
             isVisible : true,
             isLocked : false
         },
         email : {
-            value : 'elfilaoussama@gmail.com',
+            value : '',
             isVisible : true,
             isLocked : false
         },
         type : {
-            value : 'ROLE_ETUDIANT',
+            value : [],
             isVisible : true,
             isLocked : false
         },
@@ -100,7 +101,8 @@ export const UserSlice = createSlice({
         },
         setType : (state, action) => {
             state.type = action.payload
-        }
+        },
+
     }
 })
 
@@ -128,7 +130,9 @@ export const {
 
     setSexe,
 
-    setType
+    setType,
+
+    setPassword
 
 } = UserSlice.actions;
 export default UserSlice.reducer

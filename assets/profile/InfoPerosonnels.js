@@ -21,7 +21,7 @@ export default function  InfoPerosonnels() {
                         style={{
                             // height: "70px",
                             width: "90px",
-                            border: "2px solid #707070",
+                            border: "1px solid #101010",
                             borderRadius: "100px"
                         }}
                         />
@@ -40,6 +40,7 @@ export default function  InfoPerosonnels() {
                             flexDirection: "row",
                             justifyContent: "space-between",
                             alignItems: "center",
+                            marginBottom :"15px"
                         }}>
                             <div style={{
                                 margin : "10px 0px",
@@ -55,28 +56,14 @@ export default function  InfoPerosonnels() {
 
                                 <span style={{ fontWeight : "bold" }}>CNE</span><span style={{marginLeft : "15px"}}>{cne.value}</span>
                                 {cne.isLocked ? IMAGE_LOCK : ''}
-                                {cne.isVisible? IMAGE_OF_VISIBLITY : ''}
 
                             </div>
                             <div style={REQUIRED_FIELD}>
 
                                 <span style={{ fontWeight : "bold" }}>CNI</span><span style={{marginLeft : "15px"}}>{cni.value}</span>
                                 {cni.isLocked ? IMAGE_LOCK : ''}
-                                {cni.isVisible? IMAGE_OF_VISIBLITY : ''}
 
                             </div>
-                            {
-                                (telephone.value !== '') ?
-                                <div style={REQUIRED_FIELD}>
-
-                                    <span style={{fontWeight: "bold"}}>Telephone</span><span
-                                    style={{marginLeft: "15px"}}>{telephone.value}</span>
-                                    {telephone.isLocked ? IMAGE_LOCK : ''}
-                                    {telephone.isVisible? IMAGE_OF_VISIBLITY : ''}
-
-                                </div>
-                                : ''
-                            }
                             {
                                 (naissance.value !== '') ?
                                 <div style={REQUIRED_FIELD}>
@@ -84,7 +71,6 @@ export default function  InfoPerosonnels() {
                                     <span style={{fontWeight: "bold"}}>Naissance</span><span
                                     style={{marginLeft: "15px"}}>xx-xx-xx</span>
                                     {naissance.isLocked ? IMAGE_LOCK : ''}
-                                    {naissance.isVisible? IMAGE_OF_VISIBLITY : ''}
 
                                 </div>
                                     :''
@@ -95,7 +81,6 @@ export default function  InfoPerosonnels() {
                                         <span style={{ fontWeight : "bold" }}>SEXE</span>
                                         <span style={{marginLeft : "15px"}}>{sexe.value}</span>
                                         {sexe.isLocked ? IMAGE_LOCK : ''}
-                                        {sexe.isVisible? IMAGE_OF_VISIBLITY : ''}
                                     </div>
                                     : ''
                             }
@@ -105,7 +90,6 @@ export default function  InfoPerosonnels() {
                                     <span style={{ fontWeight : "bold" }}>ADRESSE</span>
                                     <span style={{marginLeft : "15px"}}>{adresse.value}</span>
                                     {adresse.isLocked ? IMAGE_LOCK : ''}
-                                    {adresse.isVisible? IMAGE_OF_VISIBLITY : ''}
                                 </div>
                                     : ''
                             }
@@ -115,8 +99,18 @@ export default function  InfoPerosonnels() {
                                     <span style={{ fontWeight : "bold" }}>VILLE</span>
                                     <span style={{marginLeft : "15px"}}>xxxxxxxxx</span>
                                     {ville.isLocked ? IMAGE_LOCK : ''}
-                                    {ville.isVisible? IMAGE_OF_VISIBLITY : ''}
                                 </div>
+                                    : ''
+                            }
+                            {
+                                (telephone.value !== '') ?
+                                    <div style={REQUIRED_FIELD}>
+
+                                        <span style={{fontWeight: "bold"}}>TELEPHONE</span><span
+                                        style={{marginLeft: "15px"}}>{telephone.value}</span>
+                                        {telephone.isLocked ? IMAGE_LOCK : ''}
+
+                                    </div>
                                     : ''
                             }
                         </div>
@@ -161,7 +155,7 @@ export default function  InfoPerosonnels() {
                             experienceModal ? <AjoutExperience /> : ''
                         }
                     </>
-                    <div style={APERCUS}><Link to={"/apercus"}>Apercus</Link></div>
+                    <div style={APERCUS}><Link to={"/apercus"}><a href="" style={{color : "#ffffff"}}>Apercus</a></Link></div>
                 </div>
 
         );
@@ -171,10 +165,10 @@ export default function  InfoPerosonnels() {
 //Styles de profile etudiant
 const REQUIRED_FIELD = {
     position : "relative",
-    padding : "4px 50px 4px 5px",
-    border : "2px solid #808080",
+    padding : "4px 15px 4px 5px",
+    border : "1px solid #707070",
     marginBottom : "15px",
-    boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.1)",
+    boxShadow: "1px 2px 2px rgba(0, 0, 0, 0.2)",
     fontWeight : "normal",
     color : "#7b7b7b"
 }
@@ -183,7 +177,7 @@ const ALL_IN_MAIN={
     color: "#12549b",
     display: "grid",
     gridTemplateColumns: "1fr 325px 2% 50% 2% 150px 1fr",
-    gridTemplateRows: "1fr 12% 14% 4% 14% 14% 14% 14% 1fr",
+    gridTemplateRows: "1fr 12% 14% 1% 14% 14% 14% 14% 1fr",
     width: "99vw",
     height: "1100px"
 }
@@ -197,17 +191,17 @@ const INFOS_HEADER = {
     padding: "20px 5px",
     textAlign: "center",
     fontWeight: "bold",
-    border: "2px solid #707070",
-    boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.1)"
+    border: "1px solid #707070",
+    boxShadow: "0px 4px 3px rgba(0, 0, 0, 0.2)"
 }
 
 const PERSONAL_INFOS ={
     gridRowStart: "5",
     gridColumn: "2 / 3",
-    border: "2px solid #707070",
     padding: "15px 20px",
     fontWeight: "bold",
-    boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.1)",
+    border: "1px solid #707070",
+    boxShadow: "0px 4px 3px rgba(0, 0, 0, 0.2)",
     height : "fit-content"
 }
 
@@ -224,11 +218,10 @@ const APERCUS ={
     backgroundColor: "#12549b",
     backgroundPosition: "13px",
     borderRadius: "10px",
-    color: "white",
     font: "bold 1.1em Arial",
     paddingLeft: "17px",
     textAlign: "center",
-    boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.1)",
+    boxShadow: "0px 4px 3px rgba(0, 0, 0, 0.2)"
 }
 
 const IMAGE_LOCK = <img style={{ position: "absolute", top: "50%", transform: "translate(-50%, -50%)", right :"0px", width: "15px" }} src={locked} alt="lock"/>

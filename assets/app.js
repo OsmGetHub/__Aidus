@@ -12,11 +12,11 @@ export default function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<OffresEmploi />} />
-                <Route path="/offreStage" element={<OffresStage />} />
-                <Route path="/offreEmploi" element={<OffresEmploi />} />
-                <Route path="/offreFormation" element={<OffresFormation />} />
-                <Route path="/Profile" element={<Profile />} />
-                <Route path="/ajouterOffre" element={<AddPost />} />
+                <Route path="/offrestage" element={<OffresStage />} />
+                <Route path="/offreemploi" element={<OffresEmploi />} />
+                <Route path="/offreformation" element={<OffresFormation />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/ajouteroffre" element={<AddPost />} />
                 <Route path="/apercus" element={<Apercus />} />
             </Routes>
         </BrowserRouter>

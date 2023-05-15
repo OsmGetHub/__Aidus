@@ -18,7 +18,7 @@ export default function AddCareer(){
 
 export let ADDCREER ={
     marginTop : "0px",
-    border: "2px solid #707070",
     height: "50px",
-    boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.1)"
+    border: "1px solid #707070",
+    boxShadow: "0px 4px 3px rgba(0, 0, 0, 0.2)",
 }

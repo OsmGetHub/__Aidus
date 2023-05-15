@@ -12,21 +12,14 @@ export default function OffresEmploi() {
     const numberOfpages = useSelector(state => state.EmploiArticles.dataAmount) / 4
     const dispatch = useDispatch()
     useEffect(() => {
-        console.log("The current page : "+currentPage)
         dispatch(fetchEmploiArticles(currentPage))
-        console.log(articles)
-
     }, [currentPage]);
-
-    useEffect(()=>{
-        console.log(articles)
-        console.log(numberOfpages)
-    })
+    
     return (
         <React.StrictMode>
             <Nav />
             <div id="Main" style={{
-                marginTop: "2px",
+                marginTop: "4px",
                 display: "flex",
                 height: "1200px",
                 backgroundColor: "#E8E8E8",
